@@ -1,0 +1,215 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto Mono', monospace;
+}
+a{
+    text-decoration: none;
+    color: #ffff;
+}
+
+body{
+    min-height: 100vh;
+}
+.header{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+.header-container{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-container div{
+    font-size: 1.2em;
+    color: #ffff;
+}
+
+.main{
+    margin-top: 5%;
+    width: 100%;
+}
+
+.flex-container{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.container{
+    width: 85%;
+}
+
+.main-container{
+    display: flex;
+    width: 100%;
+    border: #000 1px solid;
+    border-radius: 10px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.main-btns{
+    display: flex;
+    width: 85%;
+}
+
+
+.graph{
+    margin: 2% 2% 2% 2%;
+    width: 30%;
+    height: 80%;
+    border: #2bafb9 2px solid;
+    border-radius: 20px;
+}
+
+.choice{
+    margin: 2% 2% 2% 2%;
+    width: 80%;
+    border: #2bafb9 2px solid;
+    border-radius: 20px;
+    
+}
+.choice h3{
+    margin-right: 5%;
+}
+
+.uni-choice{
+    display: flex;
+    width: 100%;
+    height: 20%;
+    padding-left: 2%;
+    margin-top: 4%;
+    align-items: center;
+}
+.uni-choice:last-child{
+    margin-bottom: 4%;
+}
+
+input[type=text] {
+	appearance: none;
+	border: none;
+	outline: none;
+	border-bottom: .2em solid #8200de;
+	border-radius: .2em .2em 0 0;
+	padding: .4em;
+	color: #8200de;
+    font-size: 1em;
+}
+
+input[type=text]::placeholder{
+    text-align: center;
+    font-size: 1em;
+}
+
+.y-btns{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    height: 100%;
+}
+
+.y-btns input{
+    background-color: white;
+    color: black;
+    border: 2px solid #8200de;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 10%;
+    cursor: pointer;
+    font-size: 1.01em;
+}
+
+.r-btns{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    height: 100%;
+}
+
+.r-btns input{
+    background-color: white;
+    color: black;
+    border: 2px solid #8200de;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 15%;
+    cursor: pointer;
+    font-size: 1.01em;
+}
+
+.main-btns{
+    margin-top: 2%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btns-c{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.main-btns div div{
+    text-align: center;
+    margin-bottom: 15%;
+    cursor: pointer;
+    -webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+    border: 1px #000 solid;
+}
+
+.result-table{
+    margin-top: 8%;
+    width: 100%;
+    border: 1px #000 solid;
+    border-radius: 10px;
+    background-color: #cab3d9;
+    min-height: 50px;
+    margin-bottom: 100px;
+}
+
+
+
+.row{
+    height: 50px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-bottom: 1px #000 solid;
+}
+
+.row:last-child{
+    border: 0;
+}
+
+.row div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px #000 solid;
+}
+
+.row div:last-child{
+    border: 0;
+}
+
+
+.y-btns input[type="button"].selected,
+.r-btns input[type="button"].selected {
+    border-color: #007bff; /* Цвет обводки для выбранной кнопки */
+}
+
