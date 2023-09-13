@@ -2,7 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var yButtons = document.querySelectorAll(".y-btns input[type='button']")
     var rButtons = document.querySelectorAll(".r-btns input[type='button']")
 
-    
+    // Загрузка ранее сохраненных данных при загрузке страницы
+    loadSavedData();
+
     yButtons.forEach(function (button) {
         button.addEventListener('click', function () {           
             yButtons.forEach(function (btn) {
@@ -22,30 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
             button.classList.add('selected')
         })
     })
-
-    const xValueFromCookie = getCookie('xValue');
-    const selectedYFromCookie = getCookie('selectedY');
-    const selectedRFromCookie = getCookie('selectedR');
-
-    // Заполнение полей и выделение кнопок на основе данных из куки
-    if (xValueFromCookie) {
-        xInput.value = xValueFromCookie;
-    }
-
-    if (selectedYFromCookie) {
-        const yButton = document.querySelector(`.y-btns input[value="${selectedYFromCookie}"]`);
-        if (yButton) {
-            yButton.click();
-        }
-    }
-
-    if (selectedRFromCookie) {
-        const rButton = document.querySelector(`.r-btns input[value="${selectedRFromCookie}"]`);
-        if (rButton) {
-            rButton.click();
-        }
-    }
-
 })
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -117,15 +95,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 `
 
 
-                // Сохранение данных в куки
-                setCookie('xValue', xValue, 365); // Пример: сохранение xValue на 365 дней
-                setCookie('selectedY', selectedY.value, 365); // Пример: сохранение selectedY.value на 365 дней
-                setCookie('selectedR', selectedR.value, 365); // Пример: сохранение selectedR.value на 365 дней
-                setCookie('current-time', getCurrentTime(), 365); // Пример: сохранение selectedR.value на 365 дней
-                setCookie('execution-time', executionTime, 365); // Пример: сохранение selectedR.value на 365 дней
-                setCookie('result', response.result, 365); // Пример: сохранение selectedR.value на 365 дней
-
                 resultTable.appendChild(newRow)
+               // Сохранение данных в куки
+                saveDataToCookie({
+                    x: xValue,
+                    y: selectedY.value,
+                    r: selectedR.value,
+                    currentTime: getCurrentTime(),
+                    executionTime: executionTime,
+                    result: response.result
+                });
+
+               
             } else {
                 alert('Ошибка при отправке данных на сервер.')
             }
@@ -154,15 +135,41 @@ clearButton.addEventListener('click', function () {
     }
 });
 
-// Функция для установки куки
+
 function setCookie(name, value, days) {
     const expires = new Date();
     expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
     document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
 }
 
-// Функция для чтения куки
+
 function getCookie(name) {
     const cookieValue = document.cookie.match(`(^|;)\\s*${name}=([^;]+)`);
     return cookieValue ? cookieValue.pop() : '';
+}
+
+function loadSavedData() {
+    const savedDataJSON = getCookie('savedData');
+    if (savedDataJSON) {
+        const savedData = JSON.parse(savedDataJSON);
+        // Создайте и добавьте строки в таблицу на основе сохраненных данных
+        var newRow = document.createElement('div')
+        newRow.classList.add('row')
+
+        newRow.innerHTML = `
+            <div class="x">${savedData.x}</div>
+            <div class="y">${savedData.y}</div>
+            <div class="r">${savedData.r}</div>
+            <div class="ct">${savedData.currentTime}</div>
+            <div class="et">${savedData.executionTime} ms</div>
+            <div class="result">${savedData.result}</div>
+        `
+        var resultTable = document.querySelector('.result-table');
+        resultTable.appendChild(newRow);
+    }
+}
+
+function saveDataToCookie(data) {
+    const dataJSON = JSON.stringify(data);
+    setCookie('savedData', dataJSON, 365);
 }
