@@ -91,6 +91,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="et">${executionTime} ms</div>
                     <div class="result">${response.result}</div>
                 `
+
+
+                // Сохранение данных в куки
+                setCookie('xValue', xValue, 365); // Пример: сохранение xValue на 365 дней
+                setCookie('selectedY', selectedY.value, 365); // Пример: сохранение selectedY.value на 365 дней
+                setCookie('selectedR', selectedR.value, 365); // Пример: сохранение selectedR.value на 365 дней
+                // Сохранение других данных в куки по аналогии
+
+
                 resultTable.appendChild(newRow)
             } else {
                 alert('Ошибка при отправке данных на сервер.')
@@ -119,3 +128,16 @@ clearButton.addEventListener('click', function () {
         resultTable.removeChild(resultTable.children[1]);
     }
 });
+
+// Функция для установки куки
+function setCookie(name, value, days) {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+}
+
+// Функция для чтения куки
+function getCookie(name) {
+    const cookieValue = document.cookie.match(`(^|;)\\s*${name}=([^;]+)`);
+    return cookieValue ? cookieValue.pop() : '';
+}
