@@ -213,3 +213,13 @@ input[type=text]::placeholder{
     border-color: #007bff; /* Цвет обводки для выбранной кнопки */
 }
 
+.custom-alert{
+    display: flex;
+    position: absolute;
+    bottom: 3%;
+    right: 8%;
+    background-color: red;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+    visibility: hidden;
+}
