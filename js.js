@@ -22,6 +22,30 @@ document.addEventListener('DOMContentLoaded', function () {
             button.classList.add('selected')
         })
     })
+
+    const xValueFromCookie = getCookie('xValue');
+    const selectedYFromCookie = getCookie('selectedY');
+    const selectedRFromCookie = getCookie('selectedR');
+
+    // Заполнение полей и выделение кнопок на основе данных из куки
+    if (xValueFromCookie) {
+        xInput.value = xValueFromCookie;
+    }
+
+    if (selectedYFromCookie) {
+        const yButton = document.querySelector(`.y-btns input[value="${selectedYFromCookie}"]`);
+        if (yButton) {
+            yButton.click();
+        }
+    }
+
+    if (selectedRFromCookie) {
+        const rButton = document.querySelector(`.r-btns input[value="${selectedRFromCookie}"]`);
+        if (rButton) {
+            rButton.click();
+        }
+    }
+
 })
 
 document.addEventListener('DOMContentLoaded', function () {
