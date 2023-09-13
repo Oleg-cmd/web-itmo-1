@@ -133,8 +133,15 @@ clearButton.addEventListener('click', function () {
     while (resultTable.children.length > 1) {
         resultTable.removeChild(resultTable.children[1]);
     }
+
+    // Очистка куков с именем 'savedData'
+    clearCookie('savedData');
 });
 
+// Функция для очистки куки по имени
+function clearCookie(name) {
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+}
 
 function setCookie(name, value, days) {
     const expires = new Date();
