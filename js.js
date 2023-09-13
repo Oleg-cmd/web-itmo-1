@@ -53,8 +53,8 @@ document.addEventListener('DOMContentLoaded', function () {
         
         var xValue = parseFloat(xInput.value)
 
-        if (isNaN(xValue) || xValue > 3 || xValue < -5) {
-            alert('Введите корректное значение X в диапазоне от -5 до 3.')
+        if (isNaN(xValue) || xValue >= 3 || xValue <= -5) {
+            alert('Введите корректное значение X в диапазоне от -5 до 3. (не включительно)')
             return // Останавливаем отправку формы
         }
 
