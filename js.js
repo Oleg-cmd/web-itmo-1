@@ -151,25 +151,32 @@ function getCookie(name) {
 function loadSavedData() {
     const savedDataJSON = getCookie('savedData');
     if (savedDataJSON) {
-        const savedData = JSON.parse(savedDataJSON);
-        // Создайте и добавьте строки в таблицу на основе сохраненных данных
-        var newRow = document.createElement('div')
-        newRow.classList.add('row')
+        const savedDataArray = JSON.parse(savedDataJSON);
+        savedDataArray.forEach(function (savedData) {
+            var newRow = document.createElement('div')
+            newRow.classList.add('row')
 
-        newRow.innerHTML = `
-            <div class="x">${savedData.x}</div>
-            <div class="y">${savedData.y}</div>
-            <div class="r">${savedData.r}</div>
-            <div class="ct">${savedData.currentTime}</div>
-            <div class="et">${savedData.executionTime} ms</div>
-            <div class="result">${savedData.result}</div>
-        `
-        var resultTable = document.querySelector('.result-table');
-        resultTable.appendChild(newRow);
+            newRow.innerHTML = `
+                <div class="x">${savedData.x}</div>
+                <div class="y">${savedData.y}</div>
+                <div class="r">${savedData.r}</div>
+                <div class="ct">${savedData.currentTime}</div>
+                <div class="et">${savedData.executionTime} ms</div>
+                <div class="result">${savedData.result}</div>
+            `
+            var resultTable = document.querySelector('.result-table');
+            resultTable.appendChild(newRow);
+        });
     }
 }
 
 function saveDataToCookie(data) {
-    const dataJSON = JSON.stringify(data);
+    const savedDataJSON = getCookie('savedData');
+    let savedDataArray = [];
+    if (savedDataJSON) {
+        savedDataArray = JSON.parse(savedDataJSON);
+    }
+    savedDataArray.push(data);
+    const dataJSON = JSON.stringify(savedDataArray);
     setCookie('savedData', dataJSON, 365);
 }
