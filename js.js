@@ -97,8 +97,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 setCookie('xValue', xValue, 365); // Пример: сохранение xValue на 365 дней
                 setCookie('selectedY', selectedY.value, 365); // Пример: сохранение selectedY.value на 365 дней
                 setCookie('selectedR', selectedR.value, 365); // Пример: сохранение selectedR.value на 365 дней
-                // Сохранение других данных в куки по аналогии
-
+                setCookie('current-time', getCurrentTime(), 365); // Пример: сохранение selectedR.value на 365 дней
+                setCookie('execution-time', executionTime, 365); // Пример: сохранение selectedR.value на 365 дней
+                setCookie('result', response.result, 365); // Пример: сохранение selectedR.value на 365 дней
 
                 resultTable.appendChild(newRow)
             } else {
