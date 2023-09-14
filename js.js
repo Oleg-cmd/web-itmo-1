@@ -1,116 +1,166 @@
-document.addEventListener('DOMContentLoaded', function () {
-    let yButtons = document.querySelectorAll(".y-btns input[type='button']")
-    let rButtons = document.querySelectorAll(".r-btns input[type='button']")
+function updateData() {
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", "process.php", true);
 
-    yButtons.forEach(function (button) {
-        button.addEventListener('click', function () {           
-            yButtons.forEach(function (btn) {
-                btn.classList.remove('selected')
-            })
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      let response = JSON.parse(xhr.responseText);
+      console.log(response);
+      if (response) {
+        let resultTable = document.querySelector(".result-table");
 
-            button.classList.add('selected')
-        })
-    })
+        for (let i = 0; i < response.length; i++) {
+          let newRow = document.createElement("div");
 
-    rButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-            rButtons.forEach(function (btn) {
-                btn.classList.remove('selected')
-            })
+          newRow.classList.add("row");
 
-            button.classList.add('selected')
-        })
-    })
-})
+          newRow.innerHTML = `
+                        <div class="x">${response[i].x}</div>
+                        <div class="y">${response[i].y}</div>
+                        <div class="r">${response[i].r}</div>
+                        <div class="ct">${response[i].serverTime}</div>
+                        <div class="et">${response[i].executionTime} ms</div>
+                        <div class="result">${response[i].result}</div>
+                    `;
 
-document.addEventListener('DOMContentLoaded', function () {
-    let submitButton = document.getElementById('submit-button')
-    let resultTable = document.querySelector('.result-table');
-
-    submitButton.addEventListener('click', function () {
-        let selectedY = document.querySelector(
-            '.y-btns input[type="button"].selected',
-        )
-        let selectedR = document.querySelector(
-            '.r-btns input[type="button"].selected',
-        )
-
-        let xInput = document.getElementById('x-input')
-
-        if (!selectedY) {
-            showCustomAlert('Выберите значение Y.')
-            return // Останавливаем отправку формы
+          console.log(newRow);
+          resultTable.appendChild(newRow);
         }
+      }
+    }
+  };
+  xhr.send();
+}
 
-        if (!selectedR) {
-            showCustomAlert('Выберите значение R.')
-            return // Останавливаем отправку формы
-        }
+document.addEventListener("DOMContentLoaded", function () {
+  updateData();
+});
 
-        let xValue = parseFloat(xInput.value)
+window.addEventListener("beforeunload", function () {
+  updateData();
+});
 
-        if (isNaN(xValue) || xValue >= 3 || xValue <= -5) {
-            showCustomAlert('Введите корректное значение X в диапазоне от -5 до 3. (не включительно)')
-            return // Останавливаем отправку формы
-        }
+document.addEventListener("DOMContentLoaded", function () {
+  let yButtons = document.querySelectorAll(".y-btns input[type='button']");
+  let rButtons = document.querySelectorAll(".r-btns input[type='button']");
 
-        let formData = new FormData()
-        formData.append('x', xValue)
-        formData.append('y', selectedY.value)
-        formData.append('r', selectedR.value)
+  yButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      yButtons.forEach(function (btn) {
+        btn.classList.remove("selected");
+      });
 
-        console.log(formData)
+      button.classList.add("selected");
+    });
+  });
 
-        // Отправляем запрос на сервер
-        let xhr = new XMLHttpRequest()
-        xhr.open('POST', 'process.php', true)
-        xhr.setRequestHeader('Content-Type', 'application/json'); // Устанавливаем заголовок Content-Type
-        xhr.setRequestHeader('Accept', 'application/json'); // Устанавливаем заголовок Accept
+  rButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      rButtons.forEach(function (btn) {
+        btn.classList.remove("selected");
+      });
 
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                // Обрабатываем ответ от сервера
-                let response = JSON.parse(xhr.responseText)
+      button.classList.add("selected");
+    });
+  });
+});
 
-                let newRow = document.createElement('div')
-                newRow.classList.add('row')
+document.addEventListener("DOMContentLoaded", function () {
+  let submitButton = document.getElementById("submit-button");
+  let resultTable = document.querySelector(".result-table");
 
-                newRow.innerHTML = `
-                    <div class="x">${xValue}</div>
-                    <div class="y">${selectedY.value}</div>
-                    <div class="r">${selectedR.value}</div>
+  submitButton.addEventListener("click", function () {
+    let selectedY = document.querySelector(
+      '.y-btns input[type="button"].selected'
+    );
+    let selectedR = document.querySelector(
+      '.r-btns input[type="button"].selected'
+    );
+
+    let xInput = document.getElementById("x-input");
+
+    if (!selectedY) {
+      showCustomAlert("Выберите значение Y.");
+      return; // Останавливаем отправку формы
+    }
+
+    if (!selectedR) {
+      showCustomAlert("Выберите значение R.");
+      return; // Останавливаем отправку формы
+    }
+
+    let xValue = parseFloat(xInput.value);
+
+    if (isNaN(xValue) || xValue >= 3 || xValue <= -5) {
+      showCustomAlert(
+        "Введите корректное значение X в диапазоне от -5 до 3. (не включительно)"
+      );
+      return; // Останавливаем отправку формы
+    }
+
+    let data = {
+      x: xValue,
+      y: selectedY.value,
+      r: selectedR.value,
+    };
+
+    // Отправляем запрос на сервер
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "process.php", true);
+    xhr.setRequestHeader("Content-Type", "application/json"); // Устанавливаем заголовок Content-Type
+    xhr.setRequestHeader("Accept", "application/json"); // Устанавливаем заголовок Accept
+
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // Обрабатываем ответ от сервера
+        let response = JSON.parse(xhr.responseText);
+
+        let newRow = document.createElement("div");
+        newRow.classList.add("row");
+
+        newRow.innerHTML = `
+                    <div class="x">${response.x}</div>
+                    <div class="y">${response.y}</div>
+                    <div class="r">${response.r}</div>
                     <div class="ct">${response.serverTime}</div>
                     <div class="et">${response.executionTime} ms</div>
                     <div class="result">${response.result}</div>
-                `
+                `;
 
-                resultTable.appendChild(newRow)
-            } else {
-                showCustomAlert('Ошибка при отправке данных на сервер.')
-            }
-        }
+        resultTable.appendChild(newRow);
+      } else {
+        showCustomAlert("Ошибка при отправке данных на сервер.");
+      }
+    };
 
-        xhr.send(formData)
-    })
-})
+    xhr.send(JSON.stringify(data));
+  });
+});
 
-let clearButton = document.querySelector('.main-btns div div:last-child');
+let clearButton = document.getElementById("clearButton");
 
-clearButton.addEventListener('click', function () {
-    let resultTable = document.querySelector('.result-table');
-    let firstRow = resultTable.querySelector('.row');
-    // Удаляем все строки, начиная с второй
-    while (resultTable.children.length > 1) {
+clearButton.addEventListener("click", function () {
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "clear.php", true);
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      let resultTable = document.querySelector(".result-table");
+      while (resultTable.children.length > 1) {
         resultTable.removeChild(resultTable.children[1]);
+      }
     }
+  };
+
+  xhr.send();
 });
 
 function showCustomAlert(message) {
-    const customAlert = document.querySelector('.custom-alert');
-    customAlert.textContent = message;
-    customAlert.style.opacity = '1';
+  const customAlert = document.querySelector(".custom-alert");
+  customAlert.textContent = message;
+  customAlert.style.opacity = "1";
 
-    setTimeout(() => {
-        customAlert.style.opacity = '0';
-    }, 10000); 
+  setTimeout(() => {
+    customAlert.style.opacity = "0";
+  }, 10000);
 }

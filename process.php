@@ -1,6 +1,12 @@
 <?php
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+$start_time = microtime(true);
+
+
 
 function validateData($x, $y, $r) {
     if (
@@ -42,23 +48,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $serverTime = date('Y-m-d H:i:s T'); // Формат времени (год-месяц-день час:минута:секунда часовой_пояс)
 
          // Вычисляем execution time
-        $startTimestamp = $_SESSION['startTimestamp'];
-        $endTimestamp = time();
-        $executionTime = ($endTimestamp - $startTimestamp) * 1000; // в миллисекундах
+        $endTimestamp = microtime(true); // Записываем метку времени в конце выполнения скрипта
+        $executionTime = number_format(($endTimestamp - $start_time) * 1000, 5); // в миллисекундах
 
         $response = [
+            'x' => $x,
+            'y' => $y,
+            'r' => $r,
+            'result' => $result,
+            'serverTime' => $serverTime,
+            'executionTime' => $executionTime,
+        ];
+
+        $_SESSION['results'][] = [
+            'x' => $x,
+            'y' => $y,
+            'r' => $r,
             'result' => $result,
             'serverTime' => $serverTime,
             'executionTime' => $executionTime,
         ];
 
         header('Content-Type: application/json');
+        http_response_code(200); // "OK"
         echo json_encode($response);
     } else {
         http_response_code(400); // "Bad Request"
         $result = "Неверные значения. Пожалуйста, убедитесь, что x в диапазоне [-5, 3], y в диапазоне [-4, 4] и r в диапазоне [1, 3].";
 
         $response = [
+            'x' => $x,
+            'y' => $y,
+            'r' => $r,
             'result' => $result,
             'serverTime' => null,
             'executionTime' => null,
@@ -66,8 +87,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Content-Type: application/json');
         echo json_encode($response);
     }
+} else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_SESSION['results']) && !empty($_SESSION['results'])) {
+        header('Content-Type: application/json');
+        echo json_encode($_SESSION['results']);
+    } else {
+        echo "Нет результатов для отображения.";
+    }
 } else {
     http_response_code(405); // "Method Not Allowed"
     echo "Метод не разрешен.";
 }
+
+
 ?>
