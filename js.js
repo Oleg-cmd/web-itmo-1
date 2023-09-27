@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let newRow = document.createElement("div");
         newRow.classList.add("row");
 
-        let date = new Date(response.serverTime*1000).toLocaleDateString();
+        let date = new Date(response.serverTime*1000).toLocaleTimeString();
 
         newRow.innerHTML = `
                     <div class="x">${response.x}</div>
@@ -188,7 +188,7 @@ function showCustomAlert(message) {
 
   setTimeout(() => {
     customAlert.style.opacity = "0";
-  }, 10000);
+  }, 1000);
 }
 
 function hideCustomAlert() {
