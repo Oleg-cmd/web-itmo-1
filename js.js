@@ -100,11 +100,8 @@ document.addEventListener("DOMContentLoaded", function () {
       return; // Останавливаем отправку формы
     }
 
-    let inputText = xInput.value.replace(',', '.');
-    let xValue = parseFloat(inputText).toFixed(15);
-
-
-    if (isNaN(xValue) || xValue >= 3 || xValue <= -5) {
+    let xValue = xInput.value.replace(',', '.');
+    if (isNaN(xValue) || parseFloat(xValue) >= 3 || parseFloat(xValue) <= -5) {
       showCustomAlert(
         "Введите корректное значение X в диапазоне от -5 до 3. (не включительно)"
       );
