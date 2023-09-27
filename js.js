@@ -82,7 +82,13 @@ document.addEventListener("input", function(){
   let xInput = document.getElementById("x-input");
   const regex = /^-?\d*\.?\d+$/; // check dec
     let xValue = xInput.value.replace(',', '.');
-    if (!regex.test(xValue) || isNaN(xValue) || parseFloat(xValue) >= 3 || parseFloat(xValue) <= -5) {
+    if (!regex.test(xValue)){
+      showCustomAlert(
+        "Введенное значение X не является десятичным числом"
+      );
+      return; // Останавливаем отправку формы
+    }
+    if (isNaN(xValue) || parseFloat(xValue) >= 3 || parseFloat(xValue) <= -5) {
       showCustomAlert(
         "Введите корректное значение X в диапазоне от -5 до 3. (не включительно)"
       );
@@ -117,7 +123,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     const regex = /^-?\d*\.?\d+$/; // check dec
     let xValue = xInput.value.replace(',', '.');
-    if (!regex.test(xValue) || isNaN(xValue) || parseFloat(xValue) >= 3 || parseFloat(xValue) <= -5) {
+
+    if (!regex.test(xValue)){
+      showCustomAlert(
+        "Введенное значение X не является десятичным числом"
+      );
+      return; // Останавливаем отправку формы
+    }
+
+    if (isNaN(xValue) || parseFloat(xValue) >= 3 || parseFloat(xValue) <= -5) {
       showCustomAlert(
         "Введите корректное значение X в диапазоне от -5 до 3. (не включительно)"
       );

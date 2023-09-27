@@ -193,6 +193,13 @@ input[type=text]::placeholder {
     overflow: auto;
 }
 
+@media (min-width: 1250px) {
+    .result-table {
+        max-height: 200px;
+    }
+}
+
+
 .row {
     height: 50px;
     display: grid;
