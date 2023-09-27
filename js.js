@@ -85,6 +85,8 @@ document.addEventListener("input", function(){
         "Введите корректное значение X в диапазоне от -5 до 3. (не включительно)"
       );
       return; // Останавливаем отправку формы
+    }else{
+      hideCustomAlert()
     }
 })
 
@@ -189,6 +191,14 @@ function showCustomAlert(message) {
     customAlert.style.opacity = "0";
   }, 10000);
 }
+
+function hideCustomAlert() {
+  const customAlert = document.querySelector(".custom-alert");
+  customAlert.textContent = message;
+  customAlert.style.opacity = "0";
+}
+
+
 
 
 function isDecimal(num) {
