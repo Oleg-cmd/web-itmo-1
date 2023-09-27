@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $requestData = json_decode(file_get_contents('php://input'), true);
     if (!checkLength($requestData['x'], $requestData['y'], $requestData['z'])) {
         http_response_code(400); // "Bad Request"
-        $result = "Неверные значения. Пожалуйста, убедитесь, что x в диапазоне [-5, 3], y в диапазоне [-4, 4] и r в диапазоне [1, 3].";
+        $result = "Неверные значения. Превышен диапазон длинны допустимого значения";
         $response = [
             'x' => $x,
             'y' => $y,
