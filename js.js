@@ -288,6 +288,44 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Функция для загрузки состояния из LocalStorage
+function loadStateFromLocalStorage() {
+  const xInput = document.getElementById("x-input");
+  const yButtons = document.querySelectorAll(".y-btns input[type='button']");
+  const rButtons = document.querySelectorAll(".r-btns input[type='button']");
+
+  const savedX = localStorage.getItem("x");
+  const savedY = localStorage.getItem("y");
+  const savedR = localStorage.getItem("r");
+
+  if (savedX) {
+    xInput.value = savedX;
+  }
+
+  if (savedY) {
+    yButtons.forEach((button) => {
+      if (button.value === savedY) {
+        button.classList.add("selected");
+      } else {
+        button.classList.remove("selected");
+      }
+    });
+  }
+
+  if (savedR) {
+    rButtons.forEach((button) => {
+      if (button.value === savedR) {
+        button.classList.add("selected");
+      } else {
+        button.classList.remove("selected");
+      }
+    });
+  }
+
+  // Обновляем состояние кнопки submit после загрузки
+  updateSubmitButton();
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   loadStateFromLocalStorage();
 });
