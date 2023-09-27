@@ -4,33 +4,44 @@ function updateData() {
 
   xhr.onload = function () {
     if (xhr.status === 200) {
-      let response = JSON.parse(xhr.responseText);
-      console.log(response);
-      if (response) {
-        let resultTable = document.querySelector(".result-table");
-
-        for (let i = 0; i < response.length; i++) {
-          let newRow = document.createElement("div");
-
-          newRow.classList.add("row");
-
-          newRow.innerHTML = `
-                        <div class="x">${response[i].x}</div>
-                        <div class="y">${response[i].y}</div>
-                        <div class="r">${response[i].r}</div>
-                        <div class="ct">${response[i].serverTime}</div>
-                        <div class="et">${response[i].executionTime} ms</div>
-                        <div class="result">${response[i].result}</div>
-                    `;
-
-          console.log(newRow);
-          resultTable.appendChild(newRow);
+      let responseText = xhr.responseText.trim(); // Убираем пробельные символы
+      if (responseText) {
+        try {
+          let response = JSON.parse(responseText);
+          if (response) {
+            let resultTable = document.querySelector(".result-table");
+    
+            for (let i = 0; i < response.length; i++) {
+              let newRow = document.createElement("div");
+    
+              newRow.classList.add("row");
+    
+              newRow.innerHTML = `
+                            <div class="x">${response[i].x}</div>
+                            <div class="y">${response[i].y}</div>
+                            <div class="r">${response[i].r}</div>
+                            <div class="ct">${response[i].serverTime}</div>
+                            <div class="et">${response[i].executionTime} ms</div>
+                            <div class="result">${response[i].result}</div>
+                        `;
+    
+              // console.log(newRow);
+              resultTable.appendChild(newRow);
+            }
+          }
+        } catch (e) {
+          console.warn("Ошибка при парсинге JSON:", e);
         }
+      } else {
+        console.warn("Пустой ответ от сервера.");
       }
     }
-  };
+  }
+
   xhr.send();
 }
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
   updateData();
@@ -90,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     let inputText = xInput.value.replace(',', '.'); 
-    let xValue = parseFloat(parseFloat(inputText).toFixed(15));
+    let xValue = parseFloat(inputText).toFixed(15);
 
 
     if (isNaN(xValue) || xValue >= 3 || xValue <= -5) {
