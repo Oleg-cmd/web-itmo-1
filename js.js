@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     const regex = /^-?\d*\.?\d+$/; // check dec
     let xValue = xInput.value.replace(',', '.');
-    if (isNaN(xValue) || parseFloat(xValue) >= 3 || parseFloat(xValue) <= -5 || regex.test(xValue)) {
+    if (!regex.test(xValue) || isNaN(xValue) || parseFloat(xValue) >= 3 || parseFloat(xValue) <= -5) {
       showCustomAlert(
         "Введите корректное значение X в диапазоне от -5 до 3. (не включительно)"
       );
