@@ -76,6 +76,18 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+document.addEventListener("input", function(){
+  let xInput = document.getElementById("x-input");
+  const regex = /^-?\d*\.?\d+$/; // check dec
+    let xValue = xInput.value.replace(',', '.');
+    if (!regex.test(xValue) || isNaN(xValue) || parseFloat(xValue) >= 3 || parseFloat(xValue) <= -5) {
+      showCustomAlert(
+        "Введите корректное значение X в диапазоне от -5 до 3. (не включительно)"
+      );
+      return; // Останавливаем отправку формы
+    }
+})
+
 document.addEventListener("DOMContentLoaded", function () {
   let submitButton = document.getElementById("submit-button");
   let resultTable = document.querySelector(".result-table");
@@ -107,6 +119,9 @@ document.addEventListener("DOMContentLoaded", function () {
       );
       return; // Останавливаем отправку формы
     }
+
+    // all okey
+    submitButton.style.display = "flex"
 
     let data = {
       x: xValue,

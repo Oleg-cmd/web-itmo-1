@@ -1,18 +1,20 @@
-*{
+* {
     padding: 0;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     font-family: 'Roboto Mono', monospace;
 }
-a{
+
+a {
     text-decoration: none;
     color: #ffff;
 }
 
-body{
+body {
     min-height: 100vh;
 }
-.header{
+
+.header {
     display: flex;
     width: 100%;
     justify-content: center;
@@ -20,34 +22,34 @@ body{
     background-color: black;
 }
 
-.header-container{
+.header-container {
     width: 80%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.header-container div{
+.header-container div {
     font-size: 1.2em;
     color: #ffff;
 }
 
-.main{
+.main {
     margin-top: 5%;
     width: 100%;
 }
 
-.flex-container{
+.flex-container {
     display: flex;
     width: 100%;
     justify-content: center;
 }
 
-.container{
+.container {
     width: 85%;
 }
 
-.main-container{
+.main-container {
     display: flex;
     width: 100%;
     border: #000 1px solid;
@@ -56,13 +58,13 @@ body{
     align-items: center;
 }
 
-.main-btns{
+.main-btns {
     display: flex;
     width: 85%;
 }
 
 
-.graph{
+.graph {
     margin: 2% 2% 2% 2%;
     width: 30%;
     height: 80%;
@@ -70,18 +72,19 @@ body{
     border-radius: 20px;
 }
 
-.choice{
+.choice {
     margin: 2% 2% 2% 2%;
     width: 80%;
     border: #2bafb9 2px solid;
     border-radius: 20px;
-    
+
 }
-.choice h3{
+
+.choice h3 {
     margin-right: 5%;
 }
 
-.uni-choice{
+.uni-choice {
     display: flex;
     width: 100%;
     height: 20%;
@@ -89,34 +92,35 @@ body{
     margin-top: 4%;
     align-items: center;
 }
-.uni-choice:last-child{
+
+.uni-choice:last-child {
     margin-bottom: 4%;
 }
 
 input[type=text] {
-	appearance: none;
-	border: none;
-	outline: none;
-	border-bottom: .2em solid #8200de;
-	border-radius: .2em .2em 0 0;
-	padding: .4em;
-	color: #8200de;
+    appearance: none;
+    border: none;
+    outline: none;
+    border-bottom: .2em solid #8200de;
+    border-radius: .2em .2em 0 0;
+    padding: .4em;
+    color: #8200de;
     font-size: 1em;
 }
 
-input[type=text]::placeholder{
+input[type=text]::placeholder {
     text-align: center;
     font-size: 1em;
 }
 
-.y-btns{
+.y-btns {
     display: flex;
     justify-content: space-between;
     width: 70%;
     height: 100%;
 }
 
-.y-btns input{
+.y-btns input {
     background-color: white;
     color: black;
     border: 2px solid #8200de;
@@ -128,14 +132,14 @@ input[type=text]::placeholder{
     font-size: 1.01em;
 }
 
-.r-btns{
+.r-btns {
     display: flex;
     justify-content: space-between;
     width: 70%;
     height: 100%;
 }
 
-.r-btns input{
+.r-btns input {
     background-color: white;
     color: black;
     border: 2px solid #8200de;
@@ -147,33 +151,33 @@ input[type=text]::placeholder{
     font-size: 1.01em;
 }
 
-.main-btns{
+.main-btns {
     margin-top: 2%;
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.btns-c{
+.btns-c {
     width: 10%;
     display: flex;
     justify-content: center;
     flex-direction: column;
 }
 
-.main-btns div div{
+.main-btns div div {
     text-align: center;
     margin-bottom: 15%;
     cursor: pointer;
     -webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     border: 1px #000 solid;
 }
 
-.result-table{
+.result-table {
     margin-top: 8%;
     width: 100%;
     border: 1px #000 solid;
@@ -185,18 +189,18 @@ input[type=text]::placeholder{
 
 
 
-.row{
+.row {
     height: 50px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     border-bottom: 1px #000 solid;
 }
 
-.row:last-child{
+.row:last-child {
     border: 0;
 }
 
-.row div{
+.row div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -204,17 +208,18 @@ input[type=text]::placeholder{
     text-align: center;
 }
 
-.row div:last-child{
+.row div:last-child {
     border: 0;
 }
 
 
 .y-btns input[type="button"].selected,
 .r-btns input[type="button"].selected {
-    border-color: #007bff; /* Цвет обводки для выбранной кнопки */
+    border-color: #007bff;
+    /* Цвет обводки для выбранной кнопки */
 }
 
-.custom-alert{
+.custom-alert {
     opacity: 0;
     display: flex;
     position: absolute;
@@ -224,4 +229,8 @@ input[type=text]::placeholder{
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
     /* visibility: hidden; */
+}
+
+.submit-button {
+    display: none;
 }
