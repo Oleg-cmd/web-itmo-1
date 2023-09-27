@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="x">${response.x}</div>
                     <div class="y">${response.y}</div>
                     <div class="r">${response.r}</div>
-                    <div class="ct">${response.serverTime}</div>
+                    <div class="ct">${new Date(response.serverTime)}</div>
                     <div class="et">${response.executionTime} ms</div>
                     <div class="result">${response.result}</div>
                 `;
