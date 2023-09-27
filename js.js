@@ -28,7 +28,12 @@ function updateData() {
                         `;
     
               // console.log(newRow);
-              resultTable.insertBefore(newRow, resultTable.firstChild);
+              let firstDataRow = resultTable.querySelector(".row:not(.head)");
+              if (firstDataRow) {
+                resultTable.insertBefore(newRow, firstDataRow);
+              } else {
+                resultTable.appendChild(newRow);
+              }
             }
           }
         } catch (e) {
