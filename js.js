@@ -9,7 +9,7 @@ function updateData() {
         try {
           let response = JSON.parse(responseText);
           if (response) {
-            let resultTable = document.querySelector(".result-table");
+            let resultTable = document.querySelector(".result-table").reverse;
     
             for (let i = 0; i < response.length; i++) {
               let newRow = document.createElement("div");
@@ -28,7 +28,7 @@ function updateData() {
                         `;
     
               // console.log(newRow);
-              resultTable.appendChild(newRow);
+              resultTable.insertBefore(newRow, resultTable.firstChild);
             }
           }
         } catch (e) {
@@ -212,3 +212,67 @@ function hideCustomAlert() {
   customAlert.textContent = message;
   customAlert.style.opacity = "0";
 }
+
+
+function isFormValid() {
+  const xInput = document.getElementById("x-input");
+  const selectedY = document.querySelector('.y-btns input[type="button"].selected');
+  const selectedR = document.querySelector('.r-btns input[type="button"].selected');
+
+  return xInput.value.trim() !== "" && selectedY && selectedR;
+}
+
+
+function updateSubmitButton() {
+  const submitButton = document.getElementById("submit-button");
+  submitButton.disabled = !isFormValid();
+}
+
+// Добавляем слушатель на изменения в полях и кнопках Y и R
+document.addEventListener("DOMContentLoaded", function () {
+  const xInput = document.getElementById("x-input");
+  const yButtons = document.querySelectorAll(".y-btns input[type='button']");
+  const rButtons = document.querySelectorAll(".r-btns input[type='button']");
+
+  xInput.addEventListener("input", updateSubmitButton);
+  yButtons.forEach((button) => {
+    button.addEventListener("click", updateSubmitButton);
+  });
+  rButtons.forEach((button) => {
+    button.addEventListener("click", updateSubmitButton);
+  });
+});
+
+
+// При загрузке страницы
+document.addEventListener("DOMContentLoaded", function () {
+  // Загрузка состояния кнопок из localStorage
+  let savedY = localStorage.getItem('selectedY');
+  let savedR = localStorage.getItem('selectedR');
+  if (savedY) {
+      document.querySelector(`.y-btns input[value="${savedY}"]`).classList.add("selected");
+  }
+  if (savedR) {
+      document.querySelector(`.r-btns input[value="${savedR}"]`).classList.add("selected");
+  }
+
+  // Сохранение состояния кнопок в localStorage при клике
+  let yButtons = document.querySelectorAll(".y-btns input[type='button']");
+  let rButtons = document.querySelectorAll(".r-btns input[type='button']");
+
+  yButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+          localStorage.setItem('selectedY', button.value);
+      });
+  });
+
+  rButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+          localStorage.setItem('selectedR', button.value);
+      });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  loadStateFromLocalStorage();
+});

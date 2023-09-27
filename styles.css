@@ -196,6 +196,7 @@ input[type=text]::placeholder {
 @media (min-width: 1250px) {
     .result-table {
         max-height: 200px;
+        margin-top: 3%;
     }
 }
 
