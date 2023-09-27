@@ -45,16 +45,19 @@ function updateData() {
   }
 
   xhr.send();
+  updateSubmitButton()
 }
 
 
 
 document.addEventListener("DOMContentLoaded", function () {
   updateData();
+  updateSubmitButton()
 });
 
 window.addEventListener("beforeunload", function () {
   updateData();
+  updateSubmitButton()
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -100,6 +103,8 @@ document.addEventListener("input", function(){
     }else{
       hideCustomAlert()
     }
+
+    updateSubmitButton()
 })
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -182,6 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     xhr.send(JSON.stringify(data));
   });
+  updateSubmitButton()
 });
 
 let clearButton = document.getElementById("clearButton");
