@@ -45,19 +45,16 @@ function updateData() {
   }
 
   xhr.send();
-  updateSubmitButton()
 }
 
 
 
 document.addEventListener("DOMContentLoaded", function () {
   updateData();
-  updateSubmitButton()
 });
 
 window.addEventListener("beforeunload", function () {
   updateData();
-  updateSubmitButton()
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -103,8 +100,6 @@ document.addEventListener("input", function(){
     }else{
       hideCustomAlert()
     }
-
-    updateSubmitButton()
 })
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -187,7 +182,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     xhr.send(JSON.stringify(data));
   });
-  updateSubmitButton()
 });
 
 let clearButton = document.getElementById("clearButton");
@@ -236,12 +230,14 @@ function isFormValid() {
 
 function updateSubmitButton() {
   const submitButton = document.getElementById("submit-button");
-  submitButton.disabled = !isFormValid();
+  const isFormValidFlag = isFormValid();
 
-  if(submitButton.disabled == true){
-    submitButton.style.opacity = 0.5
-  }else{
-    submitButton.style.opacity = 1
+  submitButton.disabled = !isFormValidFlag;
+
+  if (isFormValidFlag) {
+    submitButton.style.opacity = 1;
+  } else {
+    submitButton.style.opacity = 0.5;
   }
 }
 
@@ -258,6 +254,8 @@ document.addEventListener("DOMContentLoaded", function () {
   rButtons.forEach((button) => {
     button.addEventListener("click", updateSubmitButton);
   });
+
+  updateSubmitButton();
 });
 
 
