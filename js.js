@@ -301,7 +301,8 @@ document.addEventListener("click", function (event) {
     !target.matches(".r-btns input[type='button']") &&
     !target.matches("#x-input") &&
     !target.matches(".result-table") &&
-    !target.matches(".main-container")
+    !target.matches(".main-container") &&
+    !target.matches(".main-btns")
   ) {
     // Убираем класс .selected у всех кнопок
     document
