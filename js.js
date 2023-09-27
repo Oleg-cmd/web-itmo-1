@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return; // Останавливаем отправку формы
     }
 
-    let inputText = xInput.value.replace(',', '.'); 
+    let inputText = xInput.value.replace(',', '.');
     let xValue = parseFloat(inputText).toFixed(15);
 
 
