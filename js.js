@@ -89,7 +89,9 @@ document.addEventListener("DOMContentLoaded", function () {
       return; // Останавливаем отправку формы
     }
 
-    let xValue = parseFloat(xInput.value);
+    let inputText = xInput.value.replace(',', '.'); 
+    let xValue = parseFloat(parseFloat(inputText).toFixed(15));
+
 
     if (isNaN(xValue) || xValue >= 3 || xValue <= -5) {
       showCustomAlert(
@@ -107,8 +109,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Отправляем запрос на сервер
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "process.php", true);
-    xhr.setRequestHeader("Content-Type", "application/json"); // Устанавливаем заголовок Content-Type
-    xhr.setRequestHeader("Accept", "application/json"); // Устанавливаем заголовок Accept
+    xhr.setRequestHeader("Content-Type", "application/json"); 
+    xhr.setRequestHeader("Accept", "application/json");
 
     xhr.onload = function () {
       if (xhr.status === 200) {
