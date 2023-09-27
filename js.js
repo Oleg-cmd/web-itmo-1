@@ -202,6 +202,9 @@ clearButton.addEventListener("click", function () {
   };
 
   xhr.send();
+
+  localStorage.setItem("selectedY", null)
+  localStorage.setItem("selectedR", null)
 });
 
 function showCustomAlert(message) {
