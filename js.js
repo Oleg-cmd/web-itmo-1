@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="result">${response.result}</div>
                 `;
 
-        let firstDataRow = resultTable.querySelector(".row");
+                let firstDataRow = resultTable.querySelector(".row:not(.head)");
         resultTable.insertBefore(newRow, firstDataRow);
       } else {
         showCustomAlert("Ошибка при отправке данных на сервер.");
@@ -280,4 +280,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   loadStateFromLocalStorage();
+});
+
+document.addEventListener("click", function (event) {
+  const target = event.target;
+
+  // Проверяем, что клик не был на кнопке и не в поле ввода X
+  if (
+    !target.matches(".y-btns input[type='button']") &&
+    !target.matches(".r-btns input[type='button']") &&
+    !target.matches("#x-input") &&
+    !target.matches(".result-table")
+  ) {
+    // Убираем класс .selected у всех кнопок
+    document
+      .querySelectorAll(".y-btns input[type='button'], .r-btns input[type='button']")
+      .forEach(function (button) {
+        button.classList.remove("selected");
+      });
+  }
 });
