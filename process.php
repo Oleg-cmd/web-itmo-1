@@ -38,7 +38,7 @@ function checkHit($x, $y, $r)
 
 function checkLength($x, $y, $r)
 {
-    if (strlen($x) <= 15 && strlen($y) <= 15 && strlen($r)) {
+    if (strlen($x) <= 15 && strlen($y) <= 15 && strlen($r) <= 15) {
         return true;
     }
     return false;
