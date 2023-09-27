@@ -230,7 +230,3 @@ input[type=text]::placeholder {
     padding: 10px 10px 10px 10px;
     /* visibility: hidden; */
 }
-
-.submit-button {
-    display: none;
-}

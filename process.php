@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (validateData($x, $y, $r)) {
         $result = checkHit($x, $y, $r);
-        $serverTime = date('Y-m-d H:i:s T'); // Формат времени (год-месяц-день час:минута:секунда часовой_пояс)
+        $serverTime = time(); // Формат времени (год-месяц-день час:минута:секунда часовой_пояс)
 
         // Вычисляем execution time
         $endTimestamp = microtime(true); // Записываем метку времени в конце выполнения скрипта

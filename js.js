@@ -122,9 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return; // Останавливаем отправку формы
     }
 
-    // all okey
-    submitButton.style.display = "flex"
-
     let data = {
       x: xValue,
       y: selectedY.value,
@@ -145,11 +142,13 @@ document.addEventListener("DOMContentLoaded", function () {
         let newRow = document.createElement("div");
         newRow.classList.add("row");
 
+        let date = new Date(response.serverTime*1000).toLocaleDateString();
+
         newRow.innerHTML = `
                     <div class="x">${response.x}</div>
                     <div class="y">${response.y}</div>
                     <div class="r">${response.r}</div>
-                    <div class="ct">${new Date(response.serverTime)}</div>
+                    <div class="ct">${date}</div>
                     <div class="et">${response.executionTime} ms</div>
                     <div class="result">${response.result}</div>
                 `;
@@ -196,11 +195,4 @@ function hideCustomAlert() {
   const customAlert = document.querySelector(".custom-alert");
   customAlert.textContent = message;
   customAlert.style.opacity = "0";
-}
-
-
-
-
-function isDecimal(num) {
-  return (num % 1);
 }
