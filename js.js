@@ -27,7 +27,6 @@ function updateData() {
                             <div class="result">${response[i].result}</div>
                         `;
     
-              // console.log(newRow);
               let firstDataRow = resultTable.querySelector(".row:not(.head)");
               if (firstDataRow) {
                 resultTable.insertBefore(newRow, firstDataRow);
@@ -174,7 +173,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="result">${response.result}</div>
                 `;
 
-        resultTable.appendChild(newRow);
+        let firstDataRow = resultTable.querySelector(".row");
+        resultTable.insertBefore(newRow, firstDataRow);
       } else {
         showCustomAlert("Ошибка при отправке данных на сервер.");
       }
