@@ -16,7 +16,7 @@ function updateData() {
     
               newRow.classList.add("row");
 
-              let myTime = new Date(response.serverTime*1000).toLocaleTimeString();
+              let myTime = new Date(response[i].serverTime*1000).toLocaleTimeString();
     
               newRow.innerHTML = `
                             <div class="x">${response[i].x}</div>
