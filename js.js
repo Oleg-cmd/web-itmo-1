@@ -231,6 +231,12 @@ function isFormValid() {
 function updateSubmitButton() {
   const submitButton = document.getElementById("submit-button");
   submitButton.disabled = !isFormValid();
+
+  if(submitButton.disabled == true){
+    submitButton.style.opacity = 0.5
+  }else{
+    submitButton.style.opacity = 1
+  }
 }
 
 // Добавляем слушатель на изменения в полях и кнопках Y и R
