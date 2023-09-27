@@ -311,7 +311,7 @@ document.addEventListener("click", function (event) {
         button.classList.remove("selected");
       });
 
-    localStorage.setItem("selectedY", null)
-    localStorage.setItem("selectedR", null)
+    localStorage.removeItem("selectedY")
+    localStorage.removeItem("selectedR")
   }
 });
