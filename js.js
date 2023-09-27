@@ -329,24 +329,3 @@ function loadStateFromLocalStorage() {
 document.addEventListener("DOMContentLoaded", function () {
   loadStateFromLocalStorage();
 });
-
-document.addEventListener("click", function (event) {
-  const target = event.target;
-
-  // Проверяем, что клик не был на кнопке и не в поле ввода X
-  if (
-    !target.matches(".y-btns input[type='button']") &&
-    !target.matches(".r-btns input[type='button']") &&
-    !target.matches("#x-input") &&
-    !target.matches(".result-table") &&
-    !target.matches(".main-container") &&
-    !target.matches(".main-btns")
-  ) {
-    // Убираем класс .selected у всех кнопок
-    document
-      .querySelectorAll(".y-btns input[type='button'], .r-btns input[type='button']")
-      .forEach(function (button) {
-        button.classList.remove("selected");
-      });
-  }
-});
