@@ -99,9 +99,9 @@ document.addEventListener("DOMContentLoaded", function () {
       showCustomAlert("Выберите значение R.");
       return; // Останавливаем отправку формы
     }
-
+    const regex = /^-?\d*\.?\d+$/; // check dec
     let xValue = xInput.value.replace(',', '.');
-    if (isNaN(xValue) || parseFloat(xValue) >= 3 || parseFloat(xValue) <= -5 || !isDecimal(parseFloat(xValue))) {
+    if (isNaN(xValue) || parseFloat(xValue) >= 3 || parseFloat(xValue) <= -5 || regex.test(xValue)) {
       showCustomAlert(
         "Введите корректное значение X в диапазоне от -5 до 3. (не включительно)"
       );
