@@ -9,7 +9,7 @@ function updateData() {
         try {
           let response = JSON.parse(responseText);
           if (response) {
-            let resultTable = document.querySelector(".result-table").reverse;
+            let resultTable = document.querySelector(".result-table");
     
             for (let i = 0; i < response.length; i++) {
               let newRow = document.createElement("div");
