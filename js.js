@@ -310,8 +310,5 @@ document.addEventListener("click", function (event) {
       .forEach(function (button) {
         button.classList.remove("selected");
       });
-
-    localStorage.removeItem("selectedY")
-    localStorage.removeItem("selectedR")
   }
 });
