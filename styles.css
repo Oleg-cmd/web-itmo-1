@@ -177,6 +177,10 @@ input[type=text]::placeholder {
     border: 1px #000 solid;
 }
 
+.submit-button {
+    opacity: 0.5;
+}
+
 .result-table {
     margin-top: 8%;
     width: 100%;
@@ -185,9 +189,9 @@ input[type=text]::placeholder {
     background-color: #cab3d9;
     min-height: 50px;
     margin-bottom: 100px;
+    max-height: 400px;
+    overflow: auto;
 }
-
-
 
 .row {
     height: 50px;

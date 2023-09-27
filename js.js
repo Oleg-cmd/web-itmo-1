@@ -15,12 +15,14 @@ function updateData() {
               let newRow = document.createElement("div");
     
               newRow.classList.add("row");
+
+              let myTime = new Date(response.serverTime*1000).toLocaleTimeString();
     
               newRow.innerHTML = `
                             <div class="x">${response[i].x}</div>
                             <div class="y">${response[i].y}</div>
                             <div class="r">${response[i].r}</div>
-                            <div class="ct">${response[i].serverTime}</div>
+                            <div class="ct">${myTime}</div>
                             <div class="et">${response[i].executionTime} ms</div>
                             <div class="result">${response[i].result}</div>
                         `;
