@@ -10,14 +10,16 @@ function updateData() {
           let response = JSON.parse(responseText);
           if (response) {
             let resultTable = document.querySelector(".result-table");
-    
+
             for (let i = 0; i < response.length; i++) {
               let newRow = document.createElement("div");
-    
+
               newRow.classList.add("row");
 
-              let myTime = new Date(response[i].serverTime*1000).toLocaleTimeString();
-    
+              let myTime = new Date(
+                response[i].serverTime * 1000
+              ).toLocaleTimeString();
+
               newRow.innerHTML = `
                             <div class="x">${response[i].x}</div>
                             <div class="y">${response[i].y}</div>
@@ -26,7 +28,7 @@ function updateData() {
                             <div class="et">${response[i].executionTime} ms</div>
                             <div class="result">${response[i].result}</div>
                         `;
-    
+
               let firstDataRow = resultTable.querySelector(".row:not(.head)");
               if (firstDataRow) {
                 resultTable.insertBefore(newRow, firstDataRow);
@@ -42,12 +44,10 @@ function updateData() {
         console.warn("Пустой ответ от сервера.");
       }
     }
-  }
+  };
 
   xhr.send();
 }
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
   updateData();
@@ -82,25 +82,23 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-document.addEventListener("input", function(){
+document.addEventListener("input", function () {
   let xInput = document.getElementById("x-input");
   const regex = /^-?\d*\.?\d+$/; // check dec
-    let xValue = xInput.value.replace(',', '.');
-    if (!regex.test(xValue)){
-      showCustomAlert(
-        "Введенное значение X не является десятичным числом"
-      );
-      return; // Останавливаем отправку формы
-    }
-    if (isNaN(xValue) || parseFloat(xValue) >= 3 || parseFloat(xValue) <= -5) {
-      showCustomAlert(
-        "Введите корректное значение X в диапазоне от -5 до 3. (не включительно)"
-      );
-      return; // Останавливаем отправку формы
-    }else{
-      hideCustomAlert()
-    }
-})
+  let xValue = xInput.value.replace(",", ".");
+  if (!regex.test(xValue)) {
+    showCustomAlert("Введенное значение X не является десятичным числом");
+    return; // Останавливаем отправку формы
+  }
+  if (isNaN(xValue) || parseFloat(xValue) >= 3 || parseFloat(xValue) <= -5) {
+    showCustomAlert(
+      "Введите корректное значение X в диапазоне от -5 до 3. (не включительно)"
+    );
+    return; // Останавливаем отправку формы
+  } else {
+    hideCustomAlert();
+  }
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   let submitButton = document.getElementById("submit-button");
@@ -126,12 +124,10 @@ document.addEventListener("DOMContentLoaded", function () {
       return; // Останавливаем отправку формы
     }
     const regex = /^-?\d*\.?\d+$/; // check dec
-    let xValue = xInput.value.replace(',', '.');
+    let xValue = xInput.value.replace(",", ".");
 
-    if (!regex.test(xValue)){
-      showCustomAlert(
-        "Введенное значение X не является десятичным числом"
-      );
+    if (!regex.test(xValue)) {
+      showCustomAlert("Введенное значение X не является десятичным числом");
       return; // Останавливаем отправку формы
     }
 
@@ -151,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Отправляем запрос на сервер
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "process.php", true);
-    xhr.setRequestHeader("Content-Type", "application/json"); 
+    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Accept", "application/json");
 
     xhr.onload = function () {
@@ -162,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let newRow = document.createElement("div");
         newRow.classList.add("row");
 
-        let date = new Date(response.serverTime*1000).toLocaleTimeString();
+        let date = new Date(response.serverTime * 1000).toLocaleTimeString();
 
         newRow.innerHTML = `
                     <div class="x">${response.x}</div>
@@ -173,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="result">${response.result}</div>
                 `;
 
-                let firstDataRow = resultTable.querySelector(".row:not(.head)");
+        let firstDataRow = resultTable.querySelector(".row:not(.head)");
         resultTable.insertBefore(newRow, firstDataRow);
       } else {
         showCustomAlert("Ошибка при отправке данных на сервер.");
@@ -203,8 +199,8 @@ clearButton.addEventListener("click", function () {
 
   xhr.send();
 
-  localStorage.setItem("selectedY", null)
-  localStorage.setItem("selectedR", null)
+  localStorage.setItem("selectedY", null);
+  localStorage.setItem("selectedR", null);
 });
 
 function showCustomAlert(message) {
@@ -219,19 +215,20 @@ function showCustomAlert(message) {
 
 function hideCustomAlert() {
   const customAlert = document.querySelector(".custom-alert");
-  customAlert.textContent = message;
   customAlert.style.opacity = "0";
 }
 
-
 function isFormValid() {
   const xInput = document.getElementById("x-input");
-  const selectedY = document.querySelector('.y-btns input[type="button"].selected');
-  const selectedR = document.querySelector('.r-btns input[type="button"].selected');
+  const selectedY = document.querySelector(
+    '.y-btns input[type="button"].selected'
+  );
+  const selectedR = document.querySelector(
+    '.r-btns input[type="button"].selected'
+  );
 
   return xInput.value.trim() !== "" && selectedY && selectedR;
 }
-
 
 function updateSubmitButton() {
   const submitButton = document.getElementById("submit-button");
@@ -263,17 +260,20 @@ document.addEventListener("DOMContentLoaded", function () {
   updateSubmitButton();
 });
 
-
 // При загрузке страницы
 document.addEventListener("DOMContentLoaded", function () {
   // Загрузка состояния кнопок из localStorage
-  let savedY = localStorage.getItem('selectedY');
-  let savedR = localStorage.getItem('selectedR');
+  let savedY = localStorage.getItem("selectedY");
+  let savedR = localStorage.getItem("selectedR");
   if (savedY) {
-      document.querySelector(`.y-btns input[value="${savedY}"]`).classList.add("selected");
+    document
+      .querySelector(`.y-btns input[value="${savedY}"]`)
+      .classList.add("selected");
   }
   if (savedR) {
-      document.querySelector(`.r-btns input[value="${savedR}"]`).classList.add("selected");
+    document
+      .querySelector(`.r-btns input[value="${savedR}"]`)
+      .classList.add("selected");
   }
 
   // Сохранение состояния кнопок в localStorage при клике
@@ -281,27 +281,26 @@ document.addEventListener("DOMContentLoaded", function () {
   let rButtons = document.querySelectorAll(".r-btns input[type='button']");
 
   yButtons.forEach(function (button) {
-      button.addEventListener("click", function () {
-          localStorage.setItem('selectedY', button.value);
-      });
+    button.addEventListener("click", function () {
+      localStorage.setItem("selectedY", button.value);
+    });
   });
 
   rButtons.forEach(function (button) {
-      button.addEventListener("click", function () {
-          localStorage.setItem('selectedR', button.value);
-      });
+    button.addEventListener("click", function () {
+      localStorage.setItem("selectedR", button.value);
+    });
   });
 });
 
-// Функция для загрузки состояния из LocalStorage
 function loadStateFromLocalStorage() {
   const xInput = document.getElementById("x-input");
   const yButtons = document.querySelectorAll(".y-btns input[type='button']");
   const rButtons = document.querySelectorAll(".r-btns input[type='button']");
 
-  const savedX = localStorage.getItem("x");
-  const savedY = localStorage.getItem("y");
-  const savedR = localStorage.getItem("r");
+  const savedX = localStorage.getItem("selectedX"); // Change to 'selectedX'
+  const savedY = localStorage.getItem("selectedY");
+  const savedR = localStorage.getItem("selectedR");
 
   if (savedX) {
     xInput.value = savedX;
@@ -327,7 +326,7 @@ function loadStateFromLocalStorage() {
     });
   }
 
-  // Обновляем состояние кнопки submit после загрузки
+  // Update the submit button after loading from localStorage
   updateSubmitButton();
 }
 
