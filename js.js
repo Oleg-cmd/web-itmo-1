@@ -216,6 +216,8 @@ clearButton.addEventListener("click", function () {
   rButtons.forEach(function (button) {
     button.classList.remove("selected");
   });
+
+  updateSubmitButton();
 });
 
 function showCustomAlert(message) {
