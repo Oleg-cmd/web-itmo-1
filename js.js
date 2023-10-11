@@ -199,8 +199,9 @@ clearButton.addEventListener("click", function () {
 
   xhr.send();
 
-  localStorage.setItem("selectedY", null);
-  localStorage.setItem("selectedR", null);
+  localStorage.removeItem("selectedX");
+  localStorage.removeItem("selectedY");
+  localStorage.removeItem("selectedR");
 });
 
 function showCustomAlert(message) {
@@ -265,6 +266,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Загрузка состояния кнопок из localStorage
   let savedY = localStorage.getItem("selectedY");
   let savedR = localStorage.getItem("selectedR");
+  let savedX = localStorage.getItem("selectedX");
+
   if (savedY) {
     document
       .querySelector(`.y-btns input[value="${savedY}"]`)
@@ -277,8 +280,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Сохранение состояния кнопок в localStorage при клике
+  const xInput = document.getElementById("x-input");
+  if (savedX) {
+    xInput.value = savedX.trim();
+  }
+
   let yButtons = document.querySelectorAll(".y-btns input[type='button']");
   let rButtons = document.querySelectorAll(".r-btns input[type='button']");
+
+  xInput.addEventListener("input", updateSubmitButton);
 
   yButtons.forEach(function (button) {
     button.addEventListener("click", function () {
@@ -298,7 +308,7 @@ function loadStateFromLocalStorage() {
   const yButtons = document.querySelectorAll(".y-btns input[type='button']");
   const rButtons = document.querySelectorAll(".r-btns input[type='button']");
 
-  const savedX = localStorage.getItem("selectedX"); // Change to 'selectedX'
+  const savedX = localStorage.getItem("selectedX");
   const savedY = localStorage.getItem("selectedY");
   const savedR = localStorage.getItem("selectedR");
 
