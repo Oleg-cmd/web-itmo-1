@@ -202,6 +202,28 @@ clearButton.addEventListener("click", function () {
   localStorage.removeItem("selectedX");
   localStorage.removeItem("selectedY");
   localStorage.removeItem("selectedR");
+
+  let yButtons = document.querySelectorAll(".y-btns input[type='button']");
+  let rButtons = document.querySelectorAll(".r-btns input[type='button']");
+  let xInput = document.getElementById("x-input");
+
+  xInput.value = "";
+
+  yButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      yButtons.forEach(function (btn) {
+        btn.classList.remove("selected");
+      });
+    });
+  });
+
+  rButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      rButtons.forEach(function (btn) {
+        btn.classList.remove("selected");
+      });
+    });
+  });
 });
 
 function showCustomAlert(message) {
