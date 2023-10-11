@@ -210,19 +210,11 @@ clearButton.addEventListener("click", function () {
   xInput.value = "";
 
   yButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      yButtons.forEach(function (btn) {
-        btn.classList.remove("selected");
-      });
-    });
+    button.classList.remove("selected");
   });
 
   rButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      rButtons.forEach(function (btn) {
-        btn.classList.remove("selected");
-      });
-    });
+    button.classList.remove("selected");
   });
 });
 
